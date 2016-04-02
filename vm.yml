@@ -8,17 +8,18 @@
 ###################
 PROFILE:
   ## git informations
-  email:    'user@example.com'
-  realname: 'FULL NAME'
+  email:    'developer@hostname.io'
+  realname: 'Anthony Lai'
 
   ## default shell
   shell:    '/bin/zsh'
 
   ## zsh shell layout [grml,prezto,ohmyzsh]
-  zshShell: 'grml'
+  zshShell: 'ohmyzsh'
 
   ## Github username, eg. for automatic ssh pub-key fetching
-  githubUser: ''
+  githubUser: 'baseboxorg'
+
 
 ###################
 # VM (vagrant) settings
@@ -62,7 +63,7 @@ VM:
   #
   data:
     # Image size in GB
-    size: 160
+    size: 60
 
     # Filesystem of image
     # -> ext4, btrfs or xfs
@@ -92,8 +93,8 @@ VM:
   # Shared folders
   #
   sharedFolder:
-    - { type: 'home' }
-    #- { type: 'nfs', src: '~/Projects', target: '/var/www' }
+    # - { type: 'home' }
+    - { type: 'nfs', src: '~/Code', target: '/Workspace' }
 
   # ---------------------------------------------
   # Port forwarding
@@ -109,7 +110,7 @@ VM:
   workaround:
     # Fallback ssh connection (https://github.com/mitchellh/vagrant/issues/5186)
     # -> Authentication issues? Workaround:
-    useSshPasswordAuth: false
+    useSshPasswordAuth: true
 
   # ---------------------------------------------
   # VirtualBox settings
@@ -162,27 +163,27 @@ DOCKER:
   ## Automatic docker image loading/updating
   images:
     # Official images
-    - ubuntu:12.04
+    # - ubuntu:12.04
     - ubuntu:14.04
     - ubuntu:15.04
-    - centos:7
+    # - centos:7
     # WebDevOps images
-    - webdevops/php-boilerplate:ubuntu-12.04
+    # - webdevops/php-boilerplate:ubuntu-12.04
     - webdevops/php-boilerplate:ubuntu-14.04
     - webdevops/php-boilerplate:ubuntu-15.04
-    - webdevops/php-boilerplate:centos-7
+    # - webdevops/php-boilerplate:centos-7
     # Apache
-    - httpd:2.2
+    # - httpd:2.2
     - httpd:2.4
     # Nginx
-    - nginx
+    # - nginx
     # MySQL
-    - mariadb:5.5
+    # - mariadb:5.5
     - mariadb:10
-    - mysql:5.5
-    - mysql:5.6
-    - mysql:5.7
-    - percona:5.5
+    # - mysql:5.5
+    # - mysql:5.6
+    # - mysql:5.7
+    # - percona:5.5
     - percona:5.6
     # Postgres
     - postgres:9.4
@@ -268,5 +269,5 @@ FIREWALL:
       #- { port: 22, protocol: tcp, source: '10.0.0.0/8' } # SSH
       - { port: 80, protocol: tcp }  # HTTP
       - { port: 443, protocol: tcp } # HTTPS
-      #- { port: 143, protocol: tcp } # IMAP
+      - { port: 143, protocol: tcp } # IMAP
 
