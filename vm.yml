@@ -75,7 +75,7 @@ VM:
   network:
     # Private/Host-only network
     private:
-      address: 192.168.100.101
+      address: 192.168.10.101
 
     # Public bridged network
     #  |WARNING| This can be a big security issue and an attacker could
@@ -130,9 +130,9 @@ VM:
 PROVISION:
   update:      0      # do full system update for each full provisoning (currently not stable for vmware!)
   packages:    'minimal' # full or minimal
-  samba:       1      # Samba server
+  samba:       0      # Samba server
   ntp:         1      # Time synchronization
-  mail:        0      # Mail sandbox
+  mail:        1      # Mail sandbox
   php:         0      # Local PHP
   docker:      1      # Docker server
   dockerProxy: 1      # Docker reverse proxy for containers (apache)
