@@ -15,7 +15,7 @@ PROFILE:
   shell:    '/bin/zsh'
 
   ## zsh shell layout [grml,prezto,ohmyzsh]
-  zshShell: 'ohmyzsh'
+  zshShell: 'prezto'
 
   ## Github username, eg. for automatic ssh pub-key fetching
   githubUser: 'baseboxorg'
@@ -26,7 +26,7 @@ PROFILE:
 ###################
 VM:
   # Name of VM
-  name: 'DEV-VM'
+  name: 'DevLab'
 
   # Base image
   # You can use nearly any Ubuntu 14.04 vagrant base image.
@@ -75,7 +75,7 @@ VM:
   network:
     # Private/Host-only network
     private:
-      address: 192.168.56.2
+      address: 192.168.100.101
 
     # Public bridged network
     #  |WARNING| This can be a big security issue and an attacker could
@@ -101,8 +101,8 @@ VM:
   #
   portForwarding:
     #- { guest: 80, host: 80, hostIp: '0.0.0.0', protocol: 'tcp' }
-    #- { guest: 80, host: 8000, hostIp: '0.0.0.0', protocol: 'tcp' }
-    #- { guest: 13306, host: 3306, hostIp: '0.0.0.0', protocol: 'tcp' }
+    - { guest: 80, host: 8000, hostIp: '0.0.0.0', protocol: 'tcp' }
+    - { guest: 13306, host: 3306, hostIp: '0.0.0.0', protocol: 'tcp' }
 
   # ---------------------------------------------
   # Workarounds
@@ -129,14 +129,14 @@ VM:
 ###################
 PROVISION:
   update:      0      # do full system update for each full provisoning (currently not stable for vmware!)
-  packages:    'full' # full or minimal
+  packages:    'minimal' # full or minimal
   samba:       1      # Samba server
   ntp:         1      # Time synchronization
-  mail:        1      # Mail sandbox
-  php:         1      # Local PHP
+  mail:        0      # Mail sandbox
+  php:         0      # Local PHP
   docker:      1      # Docker server
   dockerProxy: 1      # Docker reverse proxy for containers (apache)
-  clitools:    1      # CliTools
+  clitools:    0      # CliTools
 
   ## Development domain (automatic redirect of *.vm for internal use)
   developmentDomain: 'vm'
@@ -162,21 +162,25 @@ DOCKER:
 
   ## Automatic docker image loading/updating
   images:
+    - busybox
+    - alpine
+    - debian:jessie
     # Official images
     # - ubuntu:12.04
     - ubuntu:14.04
-    - ubuntu:15.04
+    - ubuntu:15.10
     # - centos:7
     # WebDevOps images
     # - webdevops/php-boilerplate:ubuntu-12.04
-    - webdevops/php-boilerplate:ubuntu-14.04
-    - webdevops/php-boilerplate:ubuntu-15.04
+    #- webdevops/php-boilerplate:ubuntu-14.04
+    #- webdevops/php-boilerplate:ubuntu-15.04
     # - webdevops/php-boilerplate:centos-7
+    - registry:2.3
     # Apache
-    # - httpd:2.2
+    - httpd:2.2
     - httpd:2.4
     # Nginx
-    # - nginx
+     - nginx
     # MySQL
     # - mariadb:5.5
     - mariadb:10
@@ -184,13 +188,14 @@ DOCKER:
     # - mysql:5.6
     # - mysql:5.7
     # - percona:5.5
-    - percona:5.6
+    # - percona:5.6
     # Postgres
     - postgres:9.4
     # Memcached
     - memcached
     # Redis
     - redis
+    - wordpress
 
 ###################
 # Packages
