@@ -18,7 +18,10 @@ VAGRANT_CUSTOMIZATION = Proc.new {|config|
      config.vm.network "forwarded_port", guest: 13306, host: 3306, host_ip: '127.0.0.1', auto_correct: true
 
     # Docker port (local only)
-     config.vm.network "forwarded_port", guest: 2376, host: 2376, host_ip: '127.0.0.1', auto_correct: true
+     config.vm.network "forwarded_port", guest: 2376, host: 2376, auto_correct: true
+     
+     # Docker port (local only)
+     config.vm.network "forwarded_port", guest: 2375, host: 2375, host_ip: '127.0.0.1', auto_correct: true
 
     ## Networks
 
